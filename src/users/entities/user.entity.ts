@@ -7,6 +7,12 @@ username: string
 
 @Prop()
 user_link: string
+
+@Prop()
+whatsappShare: string
+
+@Prop()
+twitterShare: string
 }
 
 export type UserDocument = User & Document;

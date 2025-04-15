@@ -11,17 +11,20 @@ import { TokenService } from 'src/token/token.service';
 export class UsersService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
-    // @InjectModel(Token.name) private readonly tokenModel: Model<Token>,
-    // private readonly tokenSrv: TokenService,
   ) {}
 
   async createUser(dto: CreateUserDto): Promise<BaseResponseTypeDTO> {
     const username = dto.username.toLowerCase();
     await this.findByUsername(username);
     const profilelink = await this.generateProfileUrl(username);
-    const user = new this.userModel({ ...dto, user_link: profilelink });
+    const user = new this.userModel({
+      username,
+      user_link: profilelink,
+    });
     await user.save();
-    // const token = await this.tokenSrv.generateJwt(user);
+    const socials = await this.getShareUrls(username);
+    user.whatsappShare= socials.whatsappShareUrl
+    user.twitterShare= socials.twitterShareUrl
     const data = await user.save();
 
     return {
