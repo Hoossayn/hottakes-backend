@@ -12,10 +12,9 @@ export enum Category {
 
 export enum REACTIONS {
   SPICY = 'spicy',
-  HOT = 'hot',
-  MIDGAMING = 'mid',
+  MID = 'mid',
   TRASH = 'trash',
-  COLD = 'cold',
+  VALID = 'valid',
 }
 
 export enum FILTERS {
@@ -24,13 +23,20 @@ export enum FILTERS {
   CONTROVERSIAL = 'controversial',
 }
 
+export class REACTIONSOBJ {
+  @Prop()
+  username: string;
+  @Prop()
+  reaction: string;
+}
+
 @Schema({ timestamps: true })
 export class HotTake {
   @Prop({ required: true })
   content: string;
 
-  @Prop({ required: true, enum: Category })
-  category: Category;
+  @Prop({ enum: Category })
+  category?: Category;
 
   @Prop({ default: 0 })
   hot: number;
@@ -45,6 +51,9 @@ export class HotTake {
   mid: number;
 
   @Prop({ default: 0 })
+  valid: number;
+
+  @Prop({ default: 0 })
   cold: number;
 
   @Prop({ default: false })
@@ -54,7 +63,17 @@ export class HotTake {
   sender?: string;
 
   @Prop()
-  recipientUsername?: string; 
+  reactedUsers?: REACTIONSOBJ[];
+
+  @Prop()
+  recipientUsername?: string;
+
+  @Prop()
+  takeUrl?: string;
+
+  @Prop({default: true})
+  isPublic?: boolean;
+
 }
 
 export type HotTakeDocument = HotTake & Document;

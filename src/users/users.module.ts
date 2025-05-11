@@ -6,6 +6,7 @@ import { User, UserSchema } from './entities/user.entity';
 import { Token, TokenSchema } from 'src/token/schema/token.schema';
 import { TokenModule } from 'src/token/token.module';
 
+
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),

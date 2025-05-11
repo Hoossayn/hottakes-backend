@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { HottakesModule } from './hottakes/hottakes.module';
 import * as dotenv from 'dotenv';
 import { TokenModule } from './token/token.module';
+import { NotificationModule } from './notification/notification.module';
 dotenv.config();
 
   @Module({
@@ -13,7 +14,8 @@ dotenv.config();
       MongooseModule.forRoot(String(process.env.MONGODB_URL).trim()),
       UsersModule,
       HottakesModule,
-      TokenModule
+      TokenModule,
+      NotificationModule
     ],
   
   controllers: [AppController],

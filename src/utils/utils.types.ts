@@ -131,3 +131,19 @@ export interface IPaginationFilter {
 }
 
 
+export class PaginationFilterDTO {
+  @ApiProperty({
+    required: false,
+    description: 'Number of records per page',
+    type: Number,
+  })
+  limit?: number;
+
+  @ApiProperty({
+    required: false,
+    description: 'Page number for pagination',
+    type: Number,
+  })
+  page?: number;
+
+}
